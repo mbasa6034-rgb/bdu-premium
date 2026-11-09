@@ -1,0 +1,36 @@
+name: Build BDU Premium APK
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Build Android Release APK
+        run: |
+          mkdir -p flutter/build/app/outputs/flutter-apk/
+          echo "Placeholder APK build" > flutter/build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bdu-premium-release-apk
+          path: flutter/build/app/outputs/flutter-apk/app-release.apk
