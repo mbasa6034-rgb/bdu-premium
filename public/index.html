@@ -1,36 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>BDU PREMIUM</title>
-  <style>
-    :root {
-      --primary: #1a365d;
-      --gold: #d4af37;
-      --bg: #f7fafc;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: #1a202c; }
-    .header { background: var(--primary); color: white; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
-    .header h1 { font-size: 1.4rem; }
-    .gold { color: var(--gold); }
-    .btn { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-size: 1rem; cursor: pointer; }
-    .card { background: white; margin: 16px; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    input { width: 100%; padding: 12px; margin: 8px 0 16px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 1rem; }
-    #main { padding-bottom: 40px; }
-    .error { color: #c53030; margin-top: 10px; }
-    .success { color: #276749; margin-top: 10px; }
-  </style>
-</head>
-<body>
-  <div id="app">
-    <header class="header">
-      <h1>BDU <span class="gold">PREMIUM</span></h1>
-      <button id="refreshBtn" class="btn" style="padding:8px 12px;">↻</button>
-    </header>
-    <main id="main"></main>
-  </div>
-  <script src="app.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1f4d"><title>BDU PREMIUM</title>
+<style>
+:root{--bg:#f2f6fd;--card:#fff;--tx:#0b1f4d;--mut:#64748b;--pri:#1d4ed8;--navy:#0b1f4d;--lb:#dbeafe;--gold:#d4a62a;--bd:#e2e8f0;--ok:#0e9f6e;--bad:#dc2626}
+[data-t=dark]{--bg:#070f26;--card:#0f1b3d;--tx:#e8eefc;--mut:#94a3c4;--lb:#16275a;--bd:#1e2f63}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font-family:Inter,system-ui,"Noto Sans Ethiopic",sans-serif;background:var(--bg);color:var(--tx);padding-bottom:78px;min-height:100vh}
+header{background:linear-gradient(135deg,#0b1f4d,#1d4ed8);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 18px 18px;border-radius:0 0 26px 26px;position:sticky;top:0;z-index:5;box-shadow:0 8px 24px #0b1f4d44}
+.row{display:flex;align-items:center;gap:10px}.sp{flex:1}
+.logo{font-weight:800;font-size:20px;letter-spacing:.5px}.logo b{color:var(--gold)}
+.ib{background:#ffffff22;border:0;color:#fff;border-radius:12px;width:38px;height:38px;font-size:17px;cursor:pointer}
+.ib.spin{animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+main{padding:16px;max-width:720px;margin:auto;animation:fi .35s}@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 4px 18px #0b1f4d12;border:1px solid var(--bd)}
+.hero{background:linear-gradient(135deg,#0b1f4d,#1d4ed8 70%,#3b82f6);color:#fff;border:0;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:#d4a62a33}
+h2{font-size:19px;margin:6px 0 12px}h3{font-size:16px}small,.m{color:var(--mut);font-size:13px}
+.btn{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;border:0;border-radius:14px;padding:13px 18px;font-weight:700;font-size:15px;cursor:pointer;width:100%;box-shadow:0 6px 16px #1d4ed855;transition:.2s}
+.btn:active{transform:scale(.97)}.btn.g{background:linear-gradient(135deg,#d4a62a,#f0c75e);color:#3b2a00;box-shadow:0 6px 16px #d4a62a55}
+.btn.o{background:var(--lb);color:var(--pri);box-shadow:none}.btn[disabled]{opacity:.5}
+input,select{width:100%;padding:13px 14px;border-radius:13px;border:1.5px solid var(--bd);background:var(--bg);color:var(--tx);font-size:15px;margin:5px 0 9px}
+input:focus,select:focus{outline:0;border-color:var(--pri)}
+.chips{display:flex;gap:8px;overflow:auto;padding-bottom:8px;margin-bottom:6px}
+.chip{padding:8px 14px;border-radius:99px;background:var(--card);border:1.5px solid var(--bd);white-space:nowrap;font-size:13px;font-weight:600;cursor:pointer;color:var(--tx)}
+.chip.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.item{display:flex;align-items:center;gap:12px;cursor:pointer;transition:.2s}.item:active{transform:scale(.98)}
+.ico{width:44px;height:44px;border-radius:14px;background:var(--lb);display:grid;place-items:center;font-size:20px;flex:none}
+.tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px}.free{background:#d1fae5;color:#065f46}.lock{background:#fef3c7;color:#92400e}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);display:flex;justify-content:space-around;padding:8px 6px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--bd);box-shadow:0 -6px 20px #0b1f4d14;z-index:6}
+nav button{background:0;border:0;color:var(--mut);font-size:11px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 14px;border-radius:14px;cursor:pointer}
+nav button span{font-size:20px}nav button.on{color:var(--pri);background:var(--lb)}
+.note{line-height:1.75;font-size:15px}.note table{border-collapse:collapse;width:100%}.note td,.note th{border:1px solid var(--bd);padding:6px}
+.opt{padding:12px 14px;border-radius:13px;border:1.5px solid var(--bd);margin:7px 0;cursor:pointer;background:var(--bg)}
+.opt.sel{border-color:var(--pri);background:var(--lb)}.opt.ok{border-color:var(--ok);background:#d1fae5;color:#064e3b}.opt.bad{border-color:var(--bad);background:#fee2e2;color:#7f1d1d}
+.bar{height:8px;background:var(--lb);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pri),var(--gold))}
+.err{color:var(--bad);font-size:13px;margin:6px 0;font-weight:600}.okm{color:var(--ok);font-size:13px;font-weight:600}
+.auth{min-height:100vh;display:grid;align-content:center;padding:20px;background:linear-gradient(160deg,#0b1f4d,#1d4ed8)}
+.auth .card{max-width:420px;margin:14px auto;width:100%}.auth .logo{text-align:center;font-size:34px;color:#fff}.auth p{text-align:center;color:#bfdbfe;margin-bottom:6px}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:14px;z-index:9;font-size:14px;box-shadow:0 8px 24px #0006;border:1px solid var(--gold)}
+.big{font-size:44px;font-weight:800;text-align:center;color:var(--pri)}
+</style></head><body>
+<div id="app"></div>
+<script>
+const API=(window.BDU_API||"")+"/api",$=s=>document.querySelector(s),LS=localStorage;
+const T={en:{home:"Home",notes:"Notes",exams:"Exams",mock:"Practice",me:"Account",login:"Login",signup:"Create account",phone:"Phone (09xxxxxxxx)",pass:"Password",pass2:"Confirm password",name:"Full name",uni:"University",campus:"Campus",noacc:"No account? Register",have:"Have an account? Login",free:"FREE",prem:"PREMIUM",unlock:"Unlock Premium",start:"Start",submit:"Submit",next:"Next",review:"Review",score:"Score",logout:"Logout",pay:"Submit payment",ref:"Transaction reference",receipt:"Receipt image",refresh:"Updated",offline:"Offline – showing saved content",welcome:"Welcome",device:"This account is registered to another device. Only your registered device can access this account. Contact the administrator if you need to change your device.",reqchg:"Request device change"},
+am:{home:"መነሻ",notes:"ማስታወሻ",exams:"ፈተናዎች",mock:"ልምምድ",me:"መለያ",login:"ግባ",signup:"መለያ ክፈት",phone:"ስልክ (09xxxxxxxx)",pass:"የይለፍ ቃል",pass2:"የይለፍ ቃል አረጋግጥ",name:"ሙሉ ስም",uni:"ዩኒቨርሲቲ",campus:"ካምፓስ",noacc:"መለያ የለዎትም? ይመዝገቡ",have:"መለያ አለዎት? ይግቡ",free:"ነፃ",prem:"ፕሪሚየም",unlock:"ፕሪሚየም ክፈት",start:"ጀምር",submit:"ላክ",next:"ቀጣይ",review:"ገምግም",score:"ውጤት",logout:"ውጣ",pay:"ክፍያ ላክ",ref:"የግብይት ቁጥር",receipt:"የደረሰኝ ፎቶ",refresh:"ተዘምኗል",offline:"ከመስመር ውጭ – የተቀመጠ ይዘት",welcome:"እንኳን ደህና መጡ",device:"ይህ መለያ በሌላ መሣሪያ ተመዝግቧል። የተመዘገበው መሣሪያ ብቻ ነው መግባት የሚችለው። መሣሪያ ለመቀየር አስተዳዳሪውን ያነጋግሩ።",reqchg:"የመሣሪያ ለውጥ ጠይቅ"}};
+const S={user:null,tok:LS.bdu_tok||"",lang:LS.bdu_lang||"en",th:LS.bdu_th||"light",tab:"home",data:null,prem:false,mode:"login",prog:LS.bdu_prog||"freshman",sem:"1",err:"",course:null,ch:null,sec:"intro",quiz:null,ef:"all",busy:false,off:false};
+const t=k=>T[S.lang][k]||k;
+let IID=LS.bdu_iid;if(!IID){IID=[...crypto.getRandomValues(new Uint8Array(32))].map(b=>b.toString(16).padStart(2,"0")).join("");LS.bdu_iid=IID}
+async function api(p,o={}){o.headers=Object.assign({"X-Install-Id":IID,"X-App-Version":"1.0.0"},o.headers||{});if(S.tok)o.headers.Authorization="Bearer "+S.tok;
+ const get=!o.method||o.method=="GET";try{const r=await fetch(API+p,o);const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.error||"Error");e.code=j.code;e.status=r.status;throw e}S.off=false;if(get)LS["c_"+p]=JSON.stringify(j);return j}
+ catch(e){if(get&&!e.status&&LS["c_"+p]){S.off=true;return JSON.parse(LS["c_"+p])}throw e}}
+function toast(m){const d=document.createElement("div");d.className="toast";d.textContent=m;document.body.append(d);setTimeout(()=>d.remove(),2600)}
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const PROGS=[["freshman","🎓","Freshman"],["preeng","📐","Pre-Engineering"],["preengtech","⚙️","Pre-Engineering & Technology"]];
+
+async function load(force){try{let d;try{d=await api("/content")}catch(e){const r=await fetch("content.json");d=await r.json()}
+ S.data=d.content||d;const v=await api("/version").catch(()=>null);if(v&&v.version&&LS.bdu_v&&LS.bdu_v!=v.version&&force!==0)toast("🔔 "+t("refresh")+" v"+v.version);if(v)LS.bdu_v=v.version;
+ try{const p=await api("/premium/status");S.prem=!!p.premium}catch(e){if(e.status==401)return logout(1)}}catch(e){S.data=S.data||JSON.parse(LS.bdu_content||"{}")}
+ if(S.data)LS.bdu_content=JSON.stringify(S.data)}
+async function boot(){document.documentElement.dataset.t=S.th;if(S.tok){try{const m=await api("/auth/me");S.user=m.user||m}catch(e){if(e.status==401||e.status==403){S.tok="";LS.removeItem("bdu_tok");if(e.code=="DEVICE_MISMATCH")S.err=t("device")}}}
+ if(S.user)await load();render()}
+function logout(q){if(!q)api("/auth/logout",{method:"POST"}).catch(()=>0);S.tok="";S.user=null;LS.removeItem("bdu_tok");render()}
+
+function authView(){const su=S.mode=="signup";return `<div class="auth"><div><div class="logo">BDU <b>PREMIUM</b></div><p>${t("welcome")} 🎓</p></div><div class="card"><h2>${su?t("signup"):t("login")}</h2>
+${su?`<input id="fn" placeholder="${t("name")}"><input id="un" placeholder="${t("uni")}" value="Bahir Dar University"><input id="cp" placeholder="${t("campus")}">`:""}
+<input id="ph" type="tel" inputmode="numeric" placeholder="${t("phone")}"><input id="pw" type="password" placeholder="${t("pass")}">${su?`<input id="pw2" type="password" placeholder="${t("pass2")}">`:""}
+<div class="err">${esc(S.err)}</div><button class="btn" data-a="auth" ${S.busy?"disabled":""}>${S.busy?"…":su?t("signup"):t("login")}</button>
+<p style="margin-top:14px"><a href="#" data-a="mode" style="color:var(--pri);font-weight:600">${su?t("have"):t("noacc")}</a></p>
+<div class="row" style="justify-content:center;margin-top:8px"><button class="chip" data-a="lang">${S.lang=="en"?"አማርኛ":"English"}</button></div></div></div>`}
+async function doAuth(){const v=i=>($("#"+i)||{}).value||"",su=S.mode=="signup",ph=v("ph").trim(),pw=v("pw");S.err="";
+ if(!/^(09|07)\d{8}$/.test(ph))S.err="Invalid phone number";else if(pw.length<8)S.err="Password must be 8+ characters";
+ else if(su&&(pw!=v("pw2")||!v("fn").trim()))S.err=pw!=v("pw2")?"Passwords do not match":"Name required";
+ if(S.err)return render();S.busy=true;render();
+ try{const b={phone:ph,password:pw,installation_id:IID,platform:"web",app_version:"1.0.0"};if(su)Object.assign(b,{full_name:v("fn").trim(),university:v("un").trim(),campus:v("cp").trim(),confirm_password:v("pw2")});
+  const r=await api(su?"/auth/signup":"/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});
+  S.tok=r.token;LS.bdu_tok=r.token;S.user=r.user;S.mode="login";await load()}catch(e){S.err=e.code=="DEVICE_MISMATCH"?t("device"):e.message=="Failed to fetch"?"Internet connection required":e.message}
+ S.busy=false;render()}
+
+const head=()=>`<header><div class="row"><div class="logo">BDU <b>PREMIUM</b></div><div class="sp"></div><button class="ib" data-a="lang">${S.lang=="en"?"አማ":"EN"}</button><button class="ib" data-a="theme">${S.th=="dark"?"☀️":"🌙"}</button><button class="ib" id="rf" data-a="refresh">🔄</button></div>${S.off?`<small style="color:#fde68a;display:block;margin-top:8px">📴 ${t("offline")}</small>`:""}</header>`;
+const courses=()=>((S.data&&S.data.courses)||[]).filter(c=>c.program==S.prog&&(c.semester==S.sem||!c.semester));
+const gotoCh=(ci,n)=>{S.course=ci;S.ch=n;S.sec="intro";S.tab="notes"};
+
+function homeV(){const cs=courses();return `<div class="card hero"><small style="color:#bfdbfe">${t("welcome")}</small><h2 style="color:#fff;margin:4px 0">${esc((S.user.full_name||S.user.name||"Student").split(" ")[0])} 👋</h2>
+<div class="row"><span class="tag ${S.prem?"free":"lock"}">${S.prem?"⭐ PREMIUM":"🔒 FREE PLAN"}</span></div>${S.prem?"":`<button class="btn g" style="margin-top:12px" data-a="tab" data-v="me">✨ ${t("unlock")}</button>`}</div>
+<div class="chips">${PROGS.map(p=>`<div class="chip ${S.prog==p[0]?"on":""}" data-a="prog" data-v="${p[0]}">${p[1]} ${p[2]}</div>`).join("")}</div>
+<div class="chips">${["1","2"].map(s=>`<div class="chip ${S.sem==s?"on":""}" data-a="sem" data-v="${s}">📅 Semester ${s}</div>`).join("")}</div>
+<h2>📚 Courses</h2>${cs.map(c=>`<div class="card item" data-a="course" data-v="${c.id}"><div class="ico">${c.icon||"📘"}</div><div class="sp"><h3>${esc(c.name)}</h3><small>${(c.chapters||[]).length} chapters</small></div>›</div>`).join("")||"<p class='m'>No courses yet.</p>"}`}
+
+function notesV(){const all=(S.data.courses||[]);const c=all.find(x=>x.id==S.course);
+ if(!c)return `<h2>📖 ${t("notes")}</h2>`+courses().map(c=>`<div class="card item" data-a="course" data-v="${c.id}"><div class="ico">${c.icon||"📘"}</div><div class="sp"><h3>${esc(c.name)}</h3></div>›</div>`).join("");
+ if(S.ch==null)return `<button class="chip" data-a="back0">‹ Back</button><h2 style="margin-top:10px">${c.icon||"📘"} ${esc(c.name)}</h2>`+(c.chapters||[]).map(h=>{const fr=h.n==1||S.prem;return `<div class="card item" data-a="ch" data-v="${h.n}"><div class="ico">${fr?h.n:"🔒"}</div><div class="sp"><h3>${esc(h.title)}</h3><span class="tag ${h.n==1?"free":S.prem?"free":"lock"}">${h.n==1?t("free"):S.prem?"✓":t("prem")}</span></div>›</div>`}).join("");
+ const h=c.chapters.find(x=>x.n==S.ch);const S2={intro:"Introduction",objectives:"Objectives",definitions:"Definitions",concepts:"Concepts",formulas:"Formulas",examples:"Examples",tricks:"Teacher tricks",traps:"Exam traps",memory:"Memory",revision:"Revision"};
+ const sec=h.sections||{};const keys=Object.keys(S2).filter(k=>sec[k]);if(!sec[S.sec])S.sec=keys[0];
+ return `<button class="chip" data-a="ch0">‹ ${esc(c.name)}</button><h2 style="margin-top:10px">Chapter ${h.n}: ${esc(h.title)}</h2><div class="chips">${keys.map(k=>`<div class="chip ${S.sec==k?"on":""}" data-a="sec" data-v="${k}">${S2[k]}</div>`).join("")}</div>
+<div class="card note">${sec[S.sec]||""}</div><button class="btn" data-a="qz" data-v="${h.n}">📝 Practice this chapter</button>`}
+
+function examsV(){const ex=(S.data.exams||[]);const ty=["all","Midterm","Final","Quiz","Home test","Assignment","Practice"];const l=ex.filter(e=>S.ef=="all"||e.type==S.ef);
+ return `<h2>🗂️ ${t("exams")}</h2><div class="chips">${ty.map(x=>`<div class="chip ${S.ef==x?"on":""}" data-a="ef" data-v="${x}">${x}</div>`).join("")}</div>`+(l.map(e=>{const fr=!e.premium||S.prem;return `<div class="card item" ${fr&&e.url?`data-a="open" data-v="${esc(e.url)}"`:`data-a="tab" data-v="me"`}><div class="ico">${fr?"📄":"🔒"}</div><div class="sp"><h3>${esc(e.title)}</h3><small>${esc(e.type)} · ${esc(e.year||"")}</small></div><span class="tag ${fr?"free":"lock"}">${fr?t("free"):t("prem")}</span></div>`}).join("")||"<p class='m'>No exams yet.</p>")}
+
+function pool(ch){const o=[];(S.data.courses||[]).forEach(c=>(c.chapters||[]).forEach(h=>{if(ch&&(c.id!=S.course||h.n!=ch))return;if(h.n==1||S.prem)(h.questions||[]).forEach(q=>o.push(Object.assign({c:c.name,h:h.n},q)))}));return o}
+function mockV(){const q=S.quiz;if(!q){const n=pool().length;return `<h2>🎯 ${t("mock")}</h2><div class="card"><h3>Mock exam</h3><small>${n} questions available${S.prem?"":" (Chapter 1 only – unlock Premium for all)"}</small><p class="m" style="margin:8px 0">Question count</p><select id="qn">${[5,10,20,40,100].map(x=>`<option>${x}</option>`).join("")}</select><button class="btn" data-a="qz" data-v="0">▶ ${t("start")}</button></div>`+(JSON.parse(LS.bdu_hist||"[]").slice(0,5).map(h=>`<div class="card row"><div class="sp"><h3>${h.s}/${h.n}</h3><small>${h.d}</small></div><span class="tag ${h.s/h.n>=.5?"free":"lock"}">${Math.round(100*h.s/h.n)}%</span></div>`).join(""))}
+ if(q.done){const s=q.qs.filter((x,i)=>ok(x,q.ans[i])).length;return `<div class="card"><div class="big">${s}/${q.qs.length}</div><p style="text-align:center" class="m">${t("score")} ${Math.round(100*s/q.qs.length)}%</p><div class="bar"><i style="width:${100*s/q.qs.length}%"></i></div></div><h2>${t("review")}</h2>`+q.qs.map((x,i)=>`<div class="card"><small>${esc(x.c)} · Ch ${x.h}</small><p><b>${i+1}. ${esc(x.q)}</b></p><p class="${ok(x,q.ans[i])?"okm":"err"}">${ok(x,q.ans[i])?"✔ Correct":"✘ Your answer: "+esc(q.ans[i]??"—")}</p><p class="m">Answer: <b>${esc(x.a)}</b></p><p class="m">${esc(x.exp||"")}</p></div>`).join("")+`<button class="btn" data-a="qx">↺ New</button>`}
+ const x=q.qs[q.i],m=Math.floor(q.left/60),s=q.left%60;
+ return `<div class="row"><b>${q.i+1}/${q.qs.length}</b><div class="sp"></div><span class="tag lock" id="tm">⏱ ${m}:${String(s).padStart(2,"0")}</span></div><div class="bar" style="margin:8px 0"><i style="width:${100*(q.i+1)/q.qs.length}%"></i></div>
+<div class="card"><h3>${esc(x.q)}</h3>${x.opts?x.opts.map(o=>`<div class="opt ${q.ans[q.i]==o?"sel":""}" data-a="pick" data-v="${esc(o)}">${esc(o)}</div>`).join(""):`<input id="sa" placeholder="Answer" value="${esc(q.ans[q.i]||"")}">`}</div>
+<div class="row">${q.i>0?`<button class="btn o" data-a="prev">‹</button>`:""}${q.i<q.qs.length-1?`<button class="btn" data-a="nxt">${t("next")} ›</button>`:`<button class="btn g" data-a="fin">${t("submit")} ✓</button>`}</div>`}
+const norm=s=>String(s??"").trim().toLowerCase();const ok=(q,a)=>norm(a)==norm(q.a);
+let TI;function startQ(ch){let p=pool(ch?+ch:0).sort(()=>Math.random()-.5);const n=ch?p.length:+($("#qn")||{value:10}).value;p=p.slice(0,n);if(!p.length)return toast("No questions available");
+ S.quiz={qs:p,i:0,ans:{},left:Math.ceil(p.length*90),done:false};clearInterval(TI);TI=setInterval(()=>{if(!S.quiz||S.quiz.done)return clearInterval(TI);if(--S.quiz.left<=0)return finQ();const e=$("#tm");if(e)e.textContent="⏱ "+Math.floor(S.quiz.left/60)+":"+String(S.quiz.left%60).padStart(2,"0")},1000);S.tab="mock";render()}
+function finQ(){const q=S.quiz;if(q.i in q.ans==false&&$("#sa"))q.ans[q.i]=$("#sa").value;clearInterval(TI);q.done=true;const s=q.qs.filter((x,i)=>ok(x,q.ans[i])).length;const h=JSON.parse(LS.bdu_hist||"[]");h.unshift({s,n:q.qs.length,d:new Date().toLocaleString()});LS.bdu_hist=JSON.stringify(h.slice(0,30));render()}
+
+function meV(){const u=S.user,cf=(S.data&&S.data.config)||{};return `<div class="card hero"><div class="row"><div class="ico" style="background:#ffffff26;font-size:26px">👤</div><div><h3>${esc(u.full_name||u.name)}</h3><small style="color:#bfdbfe">${esc(u.phone)} · ${esc(u.campus||"")}</small></div></div></div>
+<div class="card"><h3>${S.prem?"⭐ Premium active":"🔒 Free plan"}</h3><small>🛡️ One account · one registered device</small></div>
+${S.prem?"":`<div class="card"><h2>✨ ${t("unlock")}</h2><p class="m">${esc(cf.price||"")}</p><div class="note" style="margin:8px 0">${cf.payment_instructions||"Follow the payment instructions provided by the administrator."}</div>
+<select id="pm">${(cf.methods||["Telebirr","CBE Birr","Bank transfer"]).map(m=>`<option>${esc(m)}</option>`).join("")}</select><input id="rf2" placeholder="${t("ref")}"><p class="m">${t("receipt")} (JPEG/PNG/WebP, ≤200 KB after compression)</p><input id="rc" type="file" accept="image/jpeg,image/png,image/webp"><div id="pe" class="err"></div>
+<button class="btn g" data-a="pay">${t("pay")}</button><button class="btn o" style="margin-top:8px" data-a="pst">Check payment status</button><p class="m" style="margin-top:8px">⚠️ Never share PINs, CVVs or passwords.</p></div>`}
+<div class="card"><button class="btn o" data-a="chg">📱 ${t("reqchg")}</button></div><button class="btn" style="background:#dc2626" data-a="out">${t("logout")}</button>`}
+function compress(f){return new Promise((res,rej)=>{const im=new Image();im.onload=async()=>{let w=1000,q=.8,b;const cv=document.createElement("canvas");while(w>=300){const r=Math.min(1,w/im.width);cv.width=im.width*r;cv.height=im.height*r;cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);for(q=.8;q>=.4;q-=.1){b=await new Promise(z=>cv.toBlob(z,"image/webp",q));if(b&&b.size<=200*1024)return res(b)}w-=200}rej(new Error("Image too large"))};im.onerror=()=>rej(new Error("Invalid image"));im.src=URL.createObjectURL(f)})}
+async function pay(){const e=$("#pe"),ref=$("#rf2").value.trim(),f=$("#rc").files[0];if(ref.length<4)return e.textContent="Enter the transaction reference";if(!f)return e.textContent="Select a receipt image";e.textContent="Uploading…";
+ try{const b=await compress(f),fd=new FormData();fd.append("reference",ref);fd.append("method",$("#pm").value);fd.append("receipt",b,"receipt.webp");await api("/receipt",{method:"POST",body:fd});e.className="okm";e.textContent="✅ Sent! Waiting for administrator approval.";}catch(x){e.className="err";e.textContent=x.message}}
+
+function render(){document.documentElement.dataset.t=S.th;const a=$("#app");
+ if(!S.user){a.innerHTML=authView();return}
+ const nav=[["home","🏠"],["notes","📖"],["exams","🗂️"],["mock","🎯"],["me","👤"]];
+ const v={home:homeV,notes:notesV,exams:examsV,mock:mockV,me:meV}[S.tab]();
+ a.innerHTML=head()+`<main>${v}</main><nav>${nav.map(n=>`<button class="${S.tab==n[0]?"on":""}" data-a="tab" data-v="${n[0]}"><span>${n[1]}</span>${t(n[0]=="mock"?"mock":n[0])}</button>`).join("")}</nav>`}
+
+document.addEventListener("click",async e=>{const el=e.target.closest("[data-a]");if(!el)return;e.preventDefault();const a=el.dataset.a,v=el.dataset.v;
+ const M={auth:doAuth,mode:()=>{S.mode=S.mode=="login"?"signup":"login";S.err=""},lang:()=>{S.lang=S.lang=="en"?"am":"en";LS.bdu_lang=S.lang},theme:()=>{S.th=S.th=="dark"?"light":"dark";LS.bdu_th=S.th},
+ tab:()=>{S.tab=v},prog:()=>{S.prog=v;LS.bdu_prog=v},sem:()=>{S.sem=v},course:()=>{S.course=v;S.ch=null;S.tab="notes"},back0:()=>{S.course=null},ch0:()=>{S.ch=null},
+ ch:()=>{if(v!=1&&!S.prem){toast("🔒 "+t("unlock"));S.tab="me"}else S.ch=+v},sec:()=>{S.sec=v},ef:()=>{S.ef=v},open:()=>window.open(v,"_blank"),
+ qz:()=>startQ(+v),pick:()=>{S.quiz.ans[S.quiz.i]=v},nxt:()=>{sv();S.quiz.i++},prev:()=>{sv();S.quiz.i--},fin:()=>{sv();finQ()},qx:()=>{S.quiz=null},out:()=>logout(),pay,
+ refresh:async()=>{const b=$("#rf");b.classList.add("spin");const old=LS.bdu_content;try{await load(0);toast("✅ "+t("refresh"))}catch(x){LS.bdu_content=old;toast("⚠️ Update failed – using last working version")}},
+ pst:async()=>{try{const r=await api("/payment/status");toast("Payment: "+(r.status||"none"));if(r.status=="approved"){await load();}}catch(x){toast(x.message)}},
+ chg:async()=>{const r=prompt("Reason for device change?");if(!r)return;try{await api("/device/change-request",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({reason:r,new_installation_id:IID})});toast("Request sent to administrator")}catch(x){toast(x.message)}}};
+ function sv(){const i=$("#sa");if(i)S.quiz.ans[S.quiz.i]=i.value}
+ if(M[a]){await M[a]();if(a!="refresh"&&a!="pay"&&a!="pst"&&a!="chg"&&a!="open")render()}});
+if("serviceWorker"in navigator&&location.protocol=="https:")navigator.serviceWorker.register("sw.js").catch(()=>0);
+boot();
+</script></body></html>
