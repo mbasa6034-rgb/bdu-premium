@@ -1,4 +1,4 @@
-const API = "https://YOUR_WORKER_URL.workers.dev";   // ← CHANGE THIS LATER
+const API = "https://bdu-premium.mbasa6034-74e.workers.dev";   // ← CHANGE THIS LATER
 
 const STORAGE_KEY = 'bdu_install_id';
 
