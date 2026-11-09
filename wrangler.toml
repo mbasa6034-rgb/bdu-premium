@@ -6,4 +6,4 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "bdu-premium-db"
-database_id = "YOUR_D1_DATABASE_ID"
+database_id = "5a056c34-c8fc-4f09-aa80-f0beee3c85c8"
