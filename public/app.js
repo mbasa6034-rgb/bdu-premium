@@ -21,7 +21,7 @@ async function api(path, options = {}) {
   const token = localStorage.getItem('bdu_token');
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
-  const res = await fetch(`\( {API} \){path}`, { ...options, headers });
+    const res = await fetch(API + path, { ...options, headers });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw data;
   return data;
