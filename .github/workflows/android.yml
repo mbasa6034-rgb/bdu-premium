@@ -23,18 +23,22 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Install Cordova & Build Android App
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Initialize and Build Capacitor APK
         run: |
-          npm install -g cordova
-          cordova create bdu_app com.bdu.premium "BDU Premium"
-          cd bdu_app
-          cordova platform add android
-          rm -rf www/*
-          cp -r ../public/* www/
-          cordova build android --debug
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "BDU Premium" "com.bdu.premium" --web-dir public
+          npx cap add android
+          npx cap copy android
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
       - name: Upload Real APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: bdu-premium-app
-          path: bdu_app/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
