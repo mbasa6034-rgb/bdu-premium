@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>BDU PREMIUM</title>
+  <style>
+    :root {
+      --primary: #1a365d;
+      --gold: #d4af37;
+      --bg: #f7fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: #1a202c; }
+    .header { background: var(--primary); color: white; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 1.4rem; }
+    .gold { color: var(--gold); }
+    .btn { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-size: 1rem; cursor: pointer; }
+    .card { background: white; margin: 16px; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    input { width: 100%; padding: 12px; margin: 8px 0 16px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 1rem; }
+    #main { padding-bottom: 40px; }
+    .error { color: #c53030; margin-top: 10px; }
+    .success { color: #276749; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <h1>BDU <span class="gold">PREMIUM</span></h1>
+      <button id="refreshBtn" class="btn" style="padding:8px 12px;">↻</button>
+    </header>
+    <main id="main"></main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
