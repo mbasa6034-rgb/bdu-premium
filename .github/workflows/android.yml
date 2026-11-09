@@ -1,4 +1,4 @@
-name: Build Real Android APK
+name: Build Real Web-to-APK
 
 on:
   push:
@@ -7,8 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Set up Node.js
@@ -22,40 +23,18 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Create Web-to-APK Project
+      - name: Install Cordova & Build Android App
         run: |
-          npm install -g nativefier
-          nativefier --name "BDU Premium" --platform android --arch arm64-v8a --disable-gpu --mamory-model low-end-device --out build-out https://mbasa634-rgb.github.io/bdu-premium/ || true
-          
-          # Fallback mechanism if nativefier needs local files
-          mkdir -p android-app/app/src/main/assets/public
-          cp -r public/* android-app/app/src/main/assets/public/
+          npm install -g cordova
+          cordova create bdu_app com.bdu.premium "BDU Premium"
+          cd bdu_app
+          cordova platform add android
+          rm -rf www/*
+          cp -r ../public/* www/
+          cordova build android --debug
 
-      - name: Build Simple WebWrapper APK via Bubblewrap/Cordova alternative or Zip
-        run: |
-          # Ensuring output size matches a real app
-          cd public
-          zip -r ../web-assets.zip *
-          cd ..
-          
-          # Generate a legitimate wrapper structure or use an automated packager script
-          mkdir -p output_apk
-          
-      - name: Use WebViews Generator Action
-        uses: Marcus10100/web-view-apk-action@v1.1
-        with:
-          app-name: "BDU Premium"
-          package-name: "com.bdu.premium"
-          url: "https://mbasa634-rgb.github.io/bdu-premium/"
-          icon: "public/favicon.ico"
-
-      - name: Download and Package Artifact
-        run: |
-          mkdir -p final-apk
-          find . -name "*.apk" -exec cp {} final-apk/ \;
-          
       - name: Upload Real APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: bdu-premium-real-apk
-          path: final-apk/*.apk
+          name: bdu-premium-app
+          path: bdu_app/platforms/android/app/build/outputs/apk/debug/app-debug.apk
